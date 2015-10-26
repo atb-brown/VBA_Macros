@@ -20,8 +20,8 @@ Sub Forward_OtherAustinBrown()
     Dim signature As String
     
     ' target recipient variables
-    targetPerson = "First Name"
-    targetEmail = "first.last@domain.com"
+    targetPerson = "FirstName LastName"
+    targetEmail = "firstname.lastname@domain.com"
     
     ' message being added to the forwarded email
     forwardStamp = "Hello " & targetPerson & ", I think this email was meant for you." _
@@ -33,13 +33,13 @@ Sub Forward_OtherAustinBrown()
     ' Make a new email for the default signature
     Set signatureMail = CreateObject("Outlook.Application").CreateItem(0)
     
-    ' Setup forward email
     Set nameSpaceObject = outlookObject.Session
-    Set forwardMail = outlookObject.ActiveInspector.CurrentItem.Forward
-    Set inspectorObject = forwardMail.GetInspector
     
-    If Not inspectorObject Is Nothing Then
+    If Not outlookObject.ActiveInspector Is Nothing Then
         If outlookObject.ActiveInspector.EditorType = olEditorWord Then
+            ' Setup the forward email
+            Set forwardMail = outlookObject.ActiveInspector.CurrentItem.Forward
+            Set inspectorObject = forwardMail.GetInspector
             
             ' Get the signature from signatureMail
             With signatureMail
